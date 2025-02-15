@@ -1,0 +1,122 @@
+/* Estilos globales */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Cinzel', serif;
+  background: linear-gradient(135deg, #3c2a21, #1c0f08);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* Pantallas superpuestas (inicio, fin y tienda) */
+.overlay-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  transition: opacity 0.8s ease;
+}
+
+.overlay-screen h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+  text-align: center;
+}
+
+.overlay-screen button {
+  padding: 15px 30px;
+  font-size: 1.5em;
+  background: #b8860b;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  color: #fff;
+  margin: 5px;
+}
+
+.overlay-screen button:hover {
+  background: #daa520;
+  transform: scale(1.05);
+}
+
+/* Contenedor del juego */
+#game-container {
+  display: none;
+  padding: 20px;
+  text-align: center;
+}
+
+#game-header {
+  font-size: 2em;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
+
+/* Visualización de puntuación y temporizador */
+#score-timer {
+  margin: 10px;
+  font-size: 1.2em;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
+
+/* Tablero de juego: 6 columnas y 4 filas */
+#game-board {
+  display: grid;
+  grid-template-columns: repeat(6, 120px);
+  grid-template-rows: repeat(4, 120px);
+  grid-gap: 15px;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+/* Estilos para cada tarjeta */
+.card {
+  width: 120px;
+  height: 120px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3em;
+  backface-visibility: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.card-back {
+  background: #8b4513;
+}
+
+.card-front {
+  background: #f0e68c;
+  transform: rotateY(180deg);
+}

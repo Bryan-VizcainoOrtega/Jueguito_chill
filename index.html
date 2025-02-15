@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Memoria Medieval</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Audios (asegúrate de tener la carpeta "audio" con los archivos correspondientes) -->
+  <audio id="flip-sound" src="audio/flip.mp3"></audio>
+  <audio id="match-sound" src="audio/match.mp3"></audio>
+  <audio id="error-sound" src="audio/error.mp3"></audio>
+  <audio id="win-sound" src="audio/win.mp3"></audio>
+  <audio id="lose-sound" src="audio/lose.mp3"></audio>
+  
+  <!-- Pantalla de inicio -->
+  <div id="start-screen" class="overlay-screen">
+    <h1>Memoria Medieval</h1>
+    <button id="start-btn">Iniciar Juego</button>
+  </div>
+  
+  <!-- Contenedor del juego -->
+  <div id="game-container">
+    <div id="game-header">Encuentra los pares</div>
+    <div id="score-timer">
+      <span id="score">Oro: 0 🪙</span> | 
+      <span id="timer">Tiempo: 01:20</span>
+    </div>
+    <div id="game-board"></div>
+  </div>
+  
+  <!-- Pantalla de fin -->
+  <div id="end-screen" class="overlay-screen" style="display:none;">
+    <h1 id="end-title"></h1>
+    <p id="end-message"></p>
+    <!-- Opciones: reiniciar o acceder a la tienda -->
+    <button id="restart-btn">Reiniciar Juego</button>
+    <button id="store-btn">Acceder a la Tienda</button>
+  </div>
+  
+  <!-- Pantalla de tienda -->
+  <div id="store-screen" class="overlay-screen" style="display:none;">
+    <h1>Tienda de Bonus</h1>
+    <p>Compra <strong>+10 segundos</strong> para la próxima partida por <strong>20 monedas</strong>.</p>
+    <button id="buy-bonus-btn">Comprar Bonus</button>
+    <button id="cancel-store-btn">Volver</button>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
