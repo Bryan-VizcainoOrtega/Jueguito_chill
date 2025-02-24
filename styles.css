@@ -68,10 +68,10 @@ body {
   text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
 }
 
-/* Tablero de juego: 6 columnas y 4 filas */
+/* Tablero de juego: cuadrícula 4x4 */
 #game-board {
   display: grid;
-  grid-template-columns: repeat(6, 120px);
+  grid-template-columns: repeat(4, 120px);
   grid-template-rows: repeat(4, 120px);
   grid-gap: 15px;
   justify-content: center;
@@ -119,4 +119,24 @@ body {
 .card-front {
   background: #f0e68c;
   transform: rotateY(180deg);
+}
+
+/* Contenedores de narrativa y quiz */
+#narrative-container,
+#quiz-container {
+  max-width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+/* Aumenta el tamaño de fuente y centra el contenido de los casos (narrativa y enunciado del quiz) */
+#narrative-text,
+#quiz-question {
+  font-size: 2em;
+  text-align: center;
+}
+
+/* Incrementa el tamaño de fuente de las opciones del quiz */
+#quiz-form label {
+  font-size: 1.5em;
 }

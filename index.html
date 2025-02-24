@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Memoria Medieval</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <!-- Audios (asegúrate de tener la carpeta "audio" con los archivos correspondientes) -->
@@ -29,11 +29,10 @@
     <div id="game-board"></div>
   </div>
   
-  <!-- Pantalla de fin -->
+  <!-- Pantalla de fin (para cuando se pierde el juego) -->
   <div id="end-screen" class="overlay-screen" style="display:none;">
     <h1 id="end-title"></h1>
     <p id="end-message"></p>
-    <!-- Opciones: reiniciar o acceder a la tienda -->
     <button id="restart-btn">Reiniciar Juego</button>
     <button id="store-btn">Acceder a la Tienda</button>
   </div>
@@ -44,6 +43,39 @@
     <p>Compra <strong>+10 segundos</strong> para la próxima partida por <strong>20 monedas</strong>.</p>
     <button id="buy-bonus-btn">Comprar Bonus</button>
     <button id="cancel-store-btn">Volver</button>
+  </div>
+  
+  <!-- Pantalla de narrativa y quiz -->
+  <div id="quiz-screen" class="overlay-screen" style="display:none;">
+    <!-- Contenedor de la narrativa -->
+    <div id="narrative-container">
+      <h1 id="narrative-title"></h1>
+      <p id="narrative-text"></p>
+      <button id="continue-btn">Continuar</button>
+    </div>
+    <!-- Contenedor del quiz -->
+    <div id="quiz-container" style="display:none;">
+      <h2 id="quiz-question">¿Qué tipo de implementación se usó en esta historia?</h2>
+      <form id="quiz-form">
+        <label>
+          <input type="radio" name="quiz-option" value="directa">
+          Implementación Directa
+        </label><br>
+        <label>
+          <input type="radio" name="quiz-option" value="fases">
+          Implementación por Fases
+        </label><br>
+        <label>
+          <input type="radio" name="quiz-option" value="local">
+          Implementación por Localidades Individuales
+        </label><br>
+        <label>
+          <input type="radio" name="quiz-option" value="paralelo">
+          Implementación en Paralelo
+        </label><br>
+        <button type="submit" id="quiz-submit-btn">Responder</button>
+      </form>
+    </div>
   </div>
   
   <script src="script.js"></script>
