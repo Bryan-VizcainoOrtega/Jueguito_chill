@@ -2,8 +2,10 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Memoria Medieval</title>
+  <title>Memoria Empresarial</title>
   <link rel="stylesheet" href="styles.css">
+  <!-- Fuente moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- Audios (asegúrate de tener la carpeta "audio" con los archivos correspondientes) -->
@@ -15,7 +17,7 @@
   
   <!-- Pantalla de inicio -->
   <div id="start-screen" class="overlay-screen">
-    <h1>Memoria Medieval</h1>
+    <h1>Memoria Empresarial</h1>
     <button id="start-btn">Iniciar Juego</button>
   </div>
   
@@ -23,13 +25,13 @@
   <div id="game-container">
     <div id="game-header">Encuentra los pares</div>
     <div id="score-timer">
-      <span id="score">Oro: 0 🪙</span> | 
+      <span id="score">Dinero: 0 💵</span> | 
       <span id="timer">Tiempo: 01:20</span>
     </div>
     <div id="game-board"></div>
   </div>
   
-  <!-- Pantalla de fin (para cuando se pierde el juego) -->
+  <!-- Pantalla de fin -->
   <div id="end-screen" class="overlay-screen" style="display:none;">
     <h1 id="end-title"></h1>
     <p id="end-message"></p>
@@ -39,8 +41,8 @@
   
   <!-- Pantalla de tienda -->
   <div id="store-screen" class="overlay-screen" style="display:none;">
-    <h1>Tienda de Bonus</h1>
-    <p>Compra <strong>+10 segundos</strong> para la próxima partida por <strong>20 monedas</strong>.</p>
+    <h1>Tienda de Bonificaciones</h1>
+    <p>Compra <strong>+10 segundos</strong> para la próxima partida por <strong>20 dinero 💵</strong>.</p>
     <button id="buy-bonus-btn">Comprar Bonus</button>
     <button id="cancel-store-btn">Volver</button>
   </div>

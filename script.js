@@ -1,7 +1,7 @@
-let totalGold = 0;       // Monedas acumuladas (persisten entre partidas)
-let bonusTime = 0;       // Tiempo extra a aplicar en la siguiente partida
+let totalMoney = 0;       // Dinero acumulado (persistente entre partidas)
+let bonusTime = 0;        // Tiempo extra a aplicar en la siguiente partida
 let matchesFound = 0;
-let timeLeft;            // Se inicializa en initGame
+let timeLeft;             // Se inicializa en initGame
 let timerInterval;
 let timerStarted = false; // Bandera para iniciar el temporizador solo al voltear la primera carta
 let firstCard = null;
@@ -9,10 +9,10 @@ let secondCard = null;
 let lockBoard = false;
 
 /* 
-  Array de emojis medievales:
-  🗡️, 🛡️, 🐉, 🏹, 👑, 🏰, ⚔️, 🐴, 🧙‍♂️, 🤴, 👸, 🧝
+  Array de emojis empresariales/tecnológicos:
+  💼, 📈, 💻, 📱, 🏢, 🚀, 📊, 🖥️, 🤖, 🔧, 📝, 📡
 */
-const emojis = ['🗡️', '🛡️', '🐉', '🏹', '👑', '🏰', '⚔️', '🐴', '🧙‍♂️', '🤴', '👸', '🧝'];
+const emojis = ['💼', '📈', '💻', '📱', '🏢', '🚀', '📊', '🖥️', '🤖', '🔧', '📝', '📡'];
 let cardValues = [];
 
 // Referencias a elementos del DOM
@@ -66,9 +66,9 @@ function formatTime(seconds) {
   return `${m < 10 ? "0" + m : m}:${s < 10 ? "0" + s : s}`;
 }
 
-// Actualiza la visualización de oro y temporizador
+// Actualiza la visualización de dinero y temporizador
 function updateScoreboard() {
-  scoreDisplay.textContent = `Oro: ${totalGold} 🪙`;
+  scoreDisplay.textContent = `Dinero: ${totalMoney} 💵`;
   timerDisplay.textContent = `Tiempo: ${formatTime(timeLeft)}`;
 }
 
@@ -81,8 +81,8 @@ function initGame() {
   updateScoreboard();
   clearInterval(timerInterval);
   
-  // Crea y mezcla las cartas (8 pares -> 16 tarjetas)
-  cardValues = shuffle(emojis.slice(0, 8).concat(emojis.slice(0, 8)));
+  // Crea y mezcla las cartas (6 pares -> 12 tarjetas)
+  cardValues = shuffle(emojis.slice(0, 6).concat(emojis.slice(0, 6)));
   
   // Limpia el tablero y genera las tarjetas
   gameBoard.innerHTML = '';
@@ -148,7 +148,7 @@ function flipCard() {
 function checkForMatch() {
   const isMatch = firstCard.dataset.value === secondCard.dataset.value;
   if (isMatch) {
-    totalGold += 10;
+    totalMoney += 10;
     matchesFound++;
     matchSound.currentTime = 0;
     matchSound.play();
@@ -158,7 +158,7 @@ function checkForMatch() {
       winGame();
     }
   } else {
-    totalGold = Math.max(0, totalGold - 1);
+    totalMoney = Math.max(0, totalMoney - 1);
     updateScoreboard();
     setTimeout(() => {
       errorSound.currentTime = 0;
@@ -191,82 +191,27 @@ function resetBoard() {
   lockBoard = false;
 }
 
-// Arreglo de narrativas de despliegue
+// Arreglo de narrativas de despliegue (casos empresariales) – cada historia describe un escenario de implementación de sistemas sin mencionar explícitamente la estrategia:
 const deploymentStories = [
   {
-    story: "El Rey, alarmado por un mensajero que trae noticias de un inminente ataque, ordena reemplazar a los veteranos defensores por una nueva unidad de caballeros entrenados. Sin intermediarios, el reino se fortalece al instante para enfrentar la amenaza.",
+    story: "Una empresa de e-commerce experimentó una falla crítica en su sistema de pagos durante una campaña de alto volumen. Ante la urgencia de restaurar el servicio, la dirección decidió intervenir de forma inmediata, aplicando una actualización en el entorno productivo.",
     type: "directa",
-    continuation: "La seguridad se restablece y la corte celebra una victoria rotunda."
+    continuation: "La acción rápida permitió reestablecer el servicio, resaltando la necesidad de mecanismos preventivos."
   },
   {
-    story: "Una terrible plaga azota las tierras y los sabios del reino invocan de inmediato un hechizo unificado que erradica la enfermedad, dejando atrás antiguas prácticas en favor de una solución inmediata.",
-    type: "directa",
-    continuation: "La vida renace en cada rincón, y la esperanza se multiplica."
-  },
-  {
-    story: "Al descubrir que un siniestro personaje ha infiltrado la corte, el monarca decide renovar por completo a sus consejeros, optando por una solución rápida para restaurar la justicia y la paz.",
-    type: "directa",
-    continuation: "El reino recupera su orden y la traición se olvida en el fragor del triunfo."
-  },
-  {
-    story: "Exploradores hallan una cueva oculta donde mora una temible bestia. En vez de lanzarse al combate sin pensar, el reino actúa con cautela: primero estudian la caverna, luego analizan al monstruo y, finalmente, ejecutan una ofensiva meticulosa.",
+    story: "Una compañía financiera planificaba actualizar su plataforma de gestión de inversiones. Se optó por comenzar con un piloto en un entorno controlado, extender la actualización a una región y, tras evaluar los resultados, implementarla en toda la organización.",
     type: "fases",
-    continuation: "La bestia es vencida y el misterio de la cueva inspira futuras leyendas."
+    continuation: "El enfoque escalonado permitió identificar y corregir problemas en cada etapa, asegurando una transición fluida."
   },
   {
-    story: "Ante la amenaza constante de invasiones, el monarca ordena una reconstrucción escalonada de las defensas: se refuerza la muralla sur, se reactivan las torres de vigilancia y, finalmente, se modernizan los sistemas de alerta.",
-    type: "fases",
-    continuation: "Cada fortificación erige un símbolo de progreso, protegiendo al reino a lo largo del tiempo."
-  },
-  {
-    story: "Cuando una tormenta mágica asola la región norte, el Consejo de Magos actúa progresivamente: primero envían hechiceros para contener el fenómeno, luego erigen barreras protectoras y, finalmente, restablecen el equilibrio natural.",
-    type: "fases",
-    continuation: "La tormenta se disipa y la armonía regresa, sellando el destino de la región."
-  },
-  {
-    story: "Un astuto mercader prueba una innovadora ruta comercial en una aldea fronteriza. Tras comprobar su éxito en ese enclave, la estrategia se extiende al resto del reino, transformando el comercio.",
+    story: "Una empresa de software estaba a punto de lanzar un nuevo sistema de gestión interna. Primero lo implementaron en la sede central para afinar los parámetros, y una vez comprobado su rendimiento, lo desplegaron en las diferentes sucursales.",
     type: "local",
-    continuation: "El comercio florece y la prosperidad se derrama por cada rincón del reino."
+    continuation: "Esta estrategia permitió adaptar el sistema a las particularidades de cada oficina, minimizando riesgos."
   },
   {
-    story: "En una aldea remota azotada por bandidos, el Consejo real decide enviar refuerzos para evaluar una nueva táctica defensiva, que, al demostrar eficacia, se replica en otras regiones.",
-    type: "local",
-    continuation: "La seguridad se consolida y las aldeas celebran la nueva era de protección."
-  },
-  {
-    story: "Mientras el método tradicional de recaudar tributos sigue vigente, el monarca introduce una alternativa revolucionaria. Durante un tiempo, ambos sistemas conviven para medir cuál optimiza mejor la obtención de oro.",
+    story: "Una corporación tecnológica se enfrentaba al desafío de modernizar su infraestructura. Para evaluar la mejor opción, pusieron a prueba dos versiones de su sistema simultáneamente: una que mantenía la solución existente y otra con una arquitectura renovada, cada una operando en entornos de prueba.",
     type: "paralelo",
-    continuation: "El balance se inclina y se establece una forma más eficiente de sostener el reino."
-  },
-  {
-    story: "Ante una inminente crisis alimentaria, el reino pone en marcha dos estrategias de cultivo al mismo tiempo —la ancestral y una técnica renovada— para determinar, mediante comparación, cuál garantiza la prosperidad del pueblo.",
-    type: "paralelo",
-    continuation: "Los campos florecen y la abundancia se consolida en cada cosecha."
-  },
-  {
-    story: "Un mago descubre en antiguos pergaminos la profecía de una inminente invasión de criaturas místicas. Primero, convoca una barrera protectora en el corazón del castillo para probar su poder; luego, tras comprobar su eficacia, extiende el conjuro a todas las murallas.",
-    type: "fases",
-    continuation: "La amenaza se desvanece y la magia del reino se fortalece con cada muro encantado."
-  },
-  {
-    story: "Rumores de un tesoro escondido en las montañas impulsan a un grupo de aventureros a ensayar una novedosa estrategia de exploración. La técnica, aplicada en los picos, se consolida y se adopta en futuras expediciones.",
-    type: "local",
-    continuation: "El misterio del tesoro se resuelve, abriendo caminos hacia nuevas riquezas."
-  },
-  {
-    story: "Una misteriosa señal emana del bosque encantado, insinuando un poder ancestral. Los guardianes del reino comienzan un experimento en una pequeña sección del bosque; al comprobar su eficacia, extienden la protección a todo el territorio.",
-    type: "local",
-    continuation: "El bosque se llena de luz y la leyenda del poder ancestral se inscribe en la historia del reino."
-  },
-  {
-    story: "Durante una asamblea, los consejeros proponen reinventar las fortificaciones del reino. Artesanos trabajan en dos frentes: renovando los escudos de los guerreros y reforzando las murallas, permitiendo evaluar la nueva táctica sin alterar la vida cotidiana.",
-    type: "paralelo",
-    continuation: "La innovación se integra en la estructura real, dando paso a una era de seguridad reforzada."
-  },
-  {
-    story: "Cuando sombras amenazan con invadir el reino, el Consejo convoca a sus mejores estrategas para probar tácticas de defensa y magia en un entorno controlado en una aldea fronteriza.",
-    type: "paralelo",
-    continuation: "El experimento se convierte en la clave para una defensa unificada, y el reino se alza en glorioso triunfo."
+    continuation: "El análisis comparativo entre ambas alternativas facilitó la toma de decisiones, considerando rendimiento y costos."
   }
 ];
 
@@ -276,7 +221,7 @@ let currentStory = null;
 function showQuizScreen() {
   let randomIndex = Math.floor(Math.random() * deploymentStories.length);
   currentStory = deploymentStories[randomIndex];
-  narrativeTitle.textContent = "¡Has desvelado un secreto!";
+  narrativeTitle.textContent = "Desafío Estratégico";
   narrativeText.textContent = currentStory.story;
   quizScreen.style.display = 'flex';
   narrativeContainer.style.display = 'block';
@@ -289,7 +234,6 @@ function winGame() {
   winSound.currentTime = 0;
   winSound.play();
   setTimeout(() => {
-    // Se muestra la narrativa y luego el quiz en lugar de la pantalla de fin tradicional
     showQuizScreen();
   }, 500);
 }
@@ -301,11 +245,11 @@ function loseGame() {
   loseSound.play();
   setTimeout(() => {
     endScreen.style.display = 'flex';
-    endTitle.textContent = 'Has perdido...';
+    endTitle.textContent = 'Desafío Fallido';
     const loseMessages = [
-      'Cada derrota es una lección para el futuro.',
-      'No te rindas, el camino hacia la gloria está lleno de desafíos.',
-      'Las cicatrices de la derrota forjan a los verdaderos guerreros.'
+      'Cada revés es una oportunidad para aprender.',
+      'No te rindas: el verdadero crecimiento nace del esfuerzo.',
+      'Los obstáculos impulsan la mejora continua.'
     ];
     endMessage.textContent = loseMessages[Math.floor(Math.random() * loseMessages.length)];
   }, 500);
@@ -320,16 +264,16 @@ function restartGame() {
   initGame();
 }
 
-// Lógica de la tienda: Comprar bonus de +10 segundos por 20 monedas
+// Lógica de la tienda: Comprar bonus de +10 segundos por 20 dinero
 function buyBonus() {
-  if(totalGold >= 20) {
-    totalGold -= 20;
+  if(totalMoney >= 20) {
+    totalMoney -= 20;
     bonusTime = 10; // Se sumarán 10 segundos en la siguiente partida
     updateScoreboard();
-    alert("¡Has comprado +10 segundos para la próxima partida!");
+    alert("¡Has adquirido +10 segundos para la próxima partida!");
     restartGame();
   } else {
-    alert("No tienes suficientes monedas para comprar este bonus.");
+    alert("No cuentas con suficiente dinero para este bonus.");
   }
 }
 
@@ -371,15 +315,14 @@ quizForm.addEventListener('submit', (e) => {
   const answer = selectedOption.value;
   let bonusAmount, penaltyAmount;
   if (answer === currentStory.type) {
-    bonusAmount = Math.max(5, Math.floor(totalGold * 0.1));
-    totalGold += bonusAmount;
-    alert("¡Correcto! " + currentStory.continuation + "\nHas ganado " + bonusAmount + " monedas extra.");
+    bonusAmount = Math.max(5, Math.floor(totalMoney * 0.1));
+    totalMoney += bonusAmount;
+    alert("¡Correcto! " + currentStory.continuation + "\nHas ganado " + bonusAmount + " dinero extra.");
   } else {
-    penaltyAmount = Math.max(10, Math.floor(totalGold * 0.2));
-    totalGold = Math.max(0, totalGold - penaltyAmount);
-    // En caso de error se muestra la respuesta correcta junto con la justificación
-    alert("Incorrecto. La respuesta correcta era: " + currentStory.type + ". " 
-          + currentStory.continuation + "\nHas perdido " + penaltyAmount + " monedas.");
+    penaltyAmount = Math.max(10, Math.floor(totalMoney * 0.2));
+    totalMoney = Math.max(0, totalMoney - penaltyAmount);
+    alert("Incorrecto. La estrategia correcta fue distinta.\n" 
+          + currentStory.continuation + "\nHas perdido " + penaltyAmount + " dinero.");
   }
   updateScoreboard();
   quizForm.reset();
